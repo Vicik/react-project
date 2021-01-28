@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
+import { withRouter } from 'react-router-dom'
 import './frame.less'
 const { Header, Content, Sider } = Layout;
+
+@withRouter
+
 class Frame extends Component {
+  changeRoute = ({key}) => {
+    this.props.history.push(key)
+  }
   render() {
     return (
-      <Layout>
+      <Layout style={{minHeight: '100%'}}>
         <Header className="header cs-header">
           <div className="logo" />
         </Header>
@@ -13,23 +20,22 @@ class Frame extends Component {
           <Sider width={200} className="site-layout-background">
             <Menu
               mode="inline"
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
+              selectedKeys={[this.props.location.pathname]}
               style={{ height: '100%', borderRight: 0 }}
+              onClick={this.changeRoute}
             >
               {
                 this.props.menus.map(menu => {
-                  return <Menu.Item key={menu.pathname}>{menu.title}</Menu.Item>
+                  const Icon = require('@ant-design/icons')[menu.icon];
+                  return <Menu.Item key={menu.pathname}>
+                    <Icon />
+                    {menu.title}
+                  </Menu.Item>
                 })
               }
             </Menu>
           </Sider>
-          <Layout style={{ padding: '0 24px 24px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb>
+          <Layout style={{ padding: '16px' }}>
             <Content
               className="site-layout-background"
               style={{

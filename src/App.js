@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Route,Switch,Redirect } from 'react-router-dom'
 import { adminRouter } from './routes'
 import { getTodos } from './services'
@@ -11,7 +11,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <Frame menus={menus}>
           <Switch>
             {adminRouter.map(route => {
@@ -24,7 +24,7 @@ class App extends Component {
             <Redirect to='/404'/>
           </Switch>
         </Frame>
-      </div>
+      </Fragment>
     );
   }
 }
