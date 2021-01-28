@@ -1,13 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import { Route,Switch,Redirect } from 'react-router-dom'
 import { adminRouter } from './routes'
-import { getTodos } from './services'
 import { Frame } from './components'
 const menus = adminRouter.filter(route => route.isNav === true)
 class App extends Component {
-  componentDidMount() {
-    console.log(getTodos)
-  }
 
   render() {
     return (

@@ -28,7 +28,7 @@ class Frame extends Component {
                 this.props.menus.map(menu => {
                   const Icon = require('@ant-design/icons')[menu.icon];
                   return <Menu.Item key={menu.pathname}>
-                    <Icon />
+                    <Icon style={{fontSize: '18px',position: 'relative',top: '2px'}}/>
                     {menu.title}
                   </Menu.Item>
                 })
@@ -39,9 +39,7 @@ class Frame extends Component {
             <Content
               className="site-layout-background"
               style={{
-                padding: 24,
                 margin: 0,
-                minHeight: 280,
                 backgroundColor: '#fff'
               }}
             >
