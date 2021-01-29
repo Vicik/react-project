@@ -18,6 +18,15 @@ services.interceptors.response.use(res => {
      // return
    }
 })
-export const getArticles = () => {
-  return services.post('/api/v1/articleList')
+// 获取文章列表
+export const getArticles = (offset=0,limited=20) => {
+  return services.post('/api/v1/articleList',{
+    offset,limited
+  })
+}
+// 通过id删除文章
+export const deleteArticle = (id) => {
+  return services.post('/api/v1/articleDelete',{
+    id
+  })
 }
