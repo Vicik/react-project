@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import './frame.less'
 const { Header, Content, Sider } = Layout;
 
+// 用于获取router的各种属性
 @withRouter
 
 class Frame extends Component {
