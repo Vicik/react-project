@@ -30,3 +30,13 @@ export const deleteArticle = (id) => {
     id
   })
 }
+
+// 通过ID获取文章
+export const getArticle = (id) => {
+  return services.post(`/api/v1/article/${id}`)
+}
+
+// 修改文章
+export const editArticle = (id,data) => {
+  return services.post(`/api/v1/articleEdit/${id}`,data)
+}

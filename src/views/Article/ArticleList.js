@@ -2,7 +2,7 @@ import React, {Component,Fragment} from 'react';
 import moment from 'moment';
 import XLSX from 'xlsx'
 import {
-  Card,Button,Table,Tag,Modal,message
+  Card,Button,Table,Tag,Modal,message,Tooltip
 } from 'antd'
 
 import { getArticles,deleteArticle } from "../../services";
@@ -42,8 +42,6 @@ class ArticleList extends Component {
         dataSource: res.list,
         columns: columns
       })
-    }).catch(err => {
-
     }).finally(() => {
       this.setState({
           isLoading: false
@@ -62,7 +60,7 @@ class ArticleList extends Component {
           key: item,
           render: (text,record) => { // 对每一列的内容进行特殊处理/格式化
             const { amount } = record
-            return <Tag color={amount > 200 ? 'red' : 'green'}>{record.amount}</Tag>
+            return <Tooltip title='阅读量'><Tag color={amount > 200 ? 'red' : 'green'}>{record.amount}</Tag></Tooltip>
           }
         }
       }
@@ -86,7 +84,7 @@ class ArticleList extends Component {
       title: '操作',
       key: 'actions',
       render: (text,record) => { // 对每一列的内容进行特殊处理/格式化
-        return <Fragment><Button size='small' type='primary'>编辑</Button><Button size='small' danger onClick={this.openDeleteArticle.bind(this,record)}>删除</Button></Fragment>
+        return <Fragment><Button size='small' type='primary' onClick={this.toEdit.bind(this,record.id)}>编辑</Button><Button size='small' danger onClick={this.openDeleteArticle.bind(this,record)}>删除</Button></Fragment>
       }
     })
     return columns
@@ -140,6 +138,11 @@ class ArticleList extends Component {
     this.setState({
       visible: false
     })
+  }
+
+  // 跳转到文章详情页进行编辑
+  toEdit = (id) => {
+    this.props.history.push('/admin/article/edit/' + id)
   }
 
   componentDidMount() {
