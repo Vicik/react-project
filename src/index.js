@@ -8,8 +8,11 @@ import zhCN from 'antd/lib/locale/zh_CN'; // 引入中文包
 
 import { BrowserRouter as Router, Route, Switch,Redirect } from 'react-router-dom'
 import { mainRouter } from './routes'
+import { Provider } from 'react-redux'
+import store from './store'
 ReactDOM.render(
   // <React.StrictMode>
+  <Provider store={store}>
     <ConfigProvider  locale={zhCN}>
       <Router>
         <Switch>
@@ -25,8 +28,10 @@ ReactDOM.render(
           <Redirect to='/404' ></Redirect>
         </Switch>
       </Router>
-    </ConfigProvider>,
-  // </React.StrictMode>,
+    </ConfigProvider>
+  </Provider>
+  // </React.StrictMode>
+,
   document.getElementById('root')
 );
 

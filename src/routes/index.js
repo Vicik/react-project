@@ -4,7 +4,8 @@ import {
   NotFound,
   ArticleList,
   ArticleEdit,
-  Settings
+  Settings,
+  Notifications
 } from '../views'
 
 export const mainRouter = [
@@ -16,4 +17,5 @@ export const adminRouter = [
   {pathname: '/admin/article',component: ArticleList,exact: true,title: '文章列表',isNav: true,icon: 'UnorderedListOutlined'},
   {pathname: '/admin/article/edit/:id',component: ArticleEdit,title: '文章编辑'},
   {pathname: '/admin/settings',component: Settings,title: '设置',isNav: true,icon: 'SettingOutlined'},
+  {pathname: '/admin/notifications',component: Notifications},
 ]

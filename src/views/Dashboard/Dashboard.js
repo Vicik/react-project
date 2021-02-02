@@ -1,8 +1,42 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment,createRef} from 'react';
 import { Card,Row,Col } from 'antd'
 import './dashboard.less'
+import * as echarts from 'echarts'
+import { getArticleAmount } from "../../services";
 
 class Dashboard extends Component {
+  constructor() {
+    super()
+    this.articleAmount = createRef()
+  }
+
+  // 初始化echarts
+  initArticleChart = () => {
+    this.articleChart = echarts.init(this.articleAmount.current)
+    getArticleAmount().then(res => {
+      const option = {
+        xAxis: {
+          boundaryGap: false,
+          data: res.amount.map(item => item.month)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: res.amount.map(item => item.value),
+          type: 'line',
+          areaStyle: {}
+        }]
+      }
+      this.articleChart.setOption(option)
+    })
+  }
+
+  componentDidMount() {
+    this.initArticleChart()
+
+  }
+
   render() {
     return (
       <Fragment>
@@ -23,7 +57,7 @@ class Dashboard extends Component {
           </Row>
         </Card>
         <Card title='文章浏览量' bordered={false}>
-
+          <div ref={this.articleAmount} style={{height: '400px'}}></div>
         </Card>
       </Fragment>
     );

@@ -26,13 +26,18 @@ const Settings = Loadable({
   loader: () => import('./Settings/Settings'),
   loading: Loading,
 })
+const Notifications = Loadable({
+  loader: () => import('./Notifications/Notifications'),
+  loading: Loading,
+})
 export {
   Dashboard,
   Login,
   NotFound,
   ArticleList,
   ArticleEdit,
-  Settings
+  Settings,
+  Notifications
 }
 // import Dashboard from "./Dashboard/Dashboard";
 // import Login from "./Login/Login"

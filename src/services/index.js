@@ -40,3 +40,13 @@ export const getArticle = (id) => {
 export const editArticle = (id,data) => {
   return services.post(`/api/v1/articleEdit/${id}`,data)
 }
+
+// 文章浏览量统计
+export const getArticleAmount = () => {
+  return services.post('/api/v1/articleAmount')
+}
+
+// 获取通知的列表
+export const getNotificationList = () => {
+  return services.post('/api/v1/notifications')
+}
