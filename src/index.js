@@ -10,15 +10,14 @@ import { BrowserRouter as Router, Route, Switch,Redirect } from 'react-router-do
 import { mainRouter } from './routes'
 import { Provider } from 'react-redux'
 import store from './store'
+
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
     <ConfigProvider  locale={zhCN}>
       <Router>
         <Switch>
-          <Route path='/admin'  render={(routerProps) => {
-            return <App {...routerProps} />
-          }} />
+          <Route path='/admin' component={App}/>
           {
             mainRouter.map(route => {
               return <Route path={route.pathname} key={route.pathname} component={route.component}/>

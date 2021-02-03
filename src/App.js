@@ -2,11 +2,19 @@ import React, {Component, Fragment} from 'react';
 import { Route,Switch,Redirect } from 'react-router-dom'
 import { adminRouter } from './routes'
 import { Frame } from './components'
-const menus = adminRouter.filter(route => route.isNav === true)
-class App extends Component {
+import { connect } from 'react-redux'
 
+const mapState = state => ({
+  isLogin: state.login.isLogin
+})
+const menus = adminRouter.filter(route => route.isNav === true)
+
+@connect(mapState)
+
+class App extends Component {
   render() {
     return (
+      this.props.isLogin ?
       <Fragment>
         <Frame menus={menus}>
           <Switch>
@@ -21,6 +29,7 @@ class App extends Component {
           </Switch>
         </Frame>
       </Fragment>
+        : <Redirect to='/login'></Redirect>
     );
   }
 }

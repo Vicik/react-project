@@ -5,28 +5,32 @@ import { connect } from 'react-redux'
 import './frame.less'
 import { UserOutlined,DownOutlined } from '@ant-design/icons'
 import { getNotifications } from '../../actions/notification'
+import { logout } from '../../actions/login'
 const { Header, Content, Sider } = Layout
 
 const mapState = state => {
   return {
-    notificationsCount: state.notifications.list.filter(item => !item.hasRead).length
+    notificationsCount: state.notifications.list.filter(item => !item.hasRead).length,
+    displayName: state.login.displayName,
+    // avatar: state.login.avatar
   }
 }
 // 用于获取router的各种属性
 @withRouter
 
-@connect(mapState,{ getNotifications })
+@connect(mapState,{ getNotifications,logout })
 
 class Frame extends Component {
-  constructor(props) {
-    super(props)
-  }
   changeRoute = ({key}) => {
     this.props.history.push(key)
   }
   // 点击下拉菜单
   onDropDownMenuClick = ({key}) => {
-    this.props.history.push(key)
+    if(key === '/admin/logout') {
+      this.props.logout()
+    }else{
+      this.props.history.push(key)
+    }
   }
 
   componentDidMount() {
@@ -58,7 +62,7 @@ class Frame extends Component {
           <Dropdown overlay={this.renderMenu()}>
             <Badge count={this.props.notificationsCount} offset={[10,0]}>
               <div style={{display: 'inline-block'}}>
-                <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} /><span>欢迎你</span><DownOutlined />
+                <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} /><span>欢迎你, {this.props.displayName}</span><DownOutlined />
               </div>
             </Badge>
           </Dropdown>

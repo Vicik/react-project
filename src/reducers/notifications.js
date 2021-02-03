@@ -4,7 +4,7 @@ const initState = {
   list: []
 }
 
-export default ( state = initState, action) => {
+const notification = ( state = initState, action) => {
   switch (action.type) {
     case actionTypes.RECIVED_NOTIFICATIONS:
       return {
@@ -44,3 +44,4 @@ export default ( state = initState, action) => {
       return state
   }
 }
+export default notification

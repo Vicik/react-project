@@ -3,6 +3,9 @@ const isDev = process.env.NODE_ENV === 'development'
 const services = axios.create({
   baseURL: isDev ? 'http://rap2api.taobao.org/app/mock/176929':'',
 })
+const services1 = axios.create({
+  baseURL: isDev ? 'http://rap2api.taobao.org/app/mock/176929':'',
+})
 services.interceptors.request.use((config) => {
   config.data = Object.assign({},config.data, {
     // authToken: window.localStorage.getItem('authToken')
@@ -49,4 +52,12 @@ export const getArticleAmount = () => {
 // 获取通知的列表
 export const getNotificationList = () => {
   return services.post('/api/v1/notifications')
+}
+
+// 登录
+// export const loginRequest = (userInfo) => {
+//   return services('/api/v1/login',userInfo)
+// }
+export const loginRequest = (userInfo) => {
+  return services1('/api/v1/login',userInfo)
 }
