@@ -37,12 +37,15 @@ class ArticleList extends Component {
     })
     getArticles(this.state.offset,this.state.limited).then(res => {
       let columns = this.formatColumns(res.list[0])
+      console.log(this)
+      if(!this.updater.isMounted(this)) return
       this.setState({
         total: res.total,
         dataSource: res.list,
         columns: columns
       })
     }).finally(() => {
+      if(!this.updater.isMounted(this)) return
       this.setState({
           isLoading: false
         }

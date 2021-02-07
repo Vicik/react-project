@@ -13,7 +13,7 @@ const mapState = state => ({
 @connect(mapState,{ login })
 class Login extends Component {
   onFinish = (values) => {
-    this.props.login(values)
+    this.props.login({...values,role: '001'})
   }
   render() {
     return (

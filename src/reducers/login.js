@@ -4,9 +4,9 @@ const initState = {
   id: '',
   displayName: userInfo ? userInfo.username : '',
   avatar: '',
-  role: '',
+  role: userInfo ? userInfo.role : '',
   isLogin: Boolean(window.localStorage.getItem('authToken')) || Boolean(window.sessionStorage.getItem('authToken')),
-  isLoading: false
+  isLoading: false,
 }
 const login = (state = initState, action) => {
   switch (action.type) {
@@ -20,7 +20,8 @@ const login = (state = initState, action) => {
         ...state,
         displayName: action.payload.userInfo.username,
         isLoading: false,
-        isLogin: true
+        isLogin: true,
+        role: action.payload.userInfo.role
       }
     case actionTypes.LOGIN_FAILED:
       return{

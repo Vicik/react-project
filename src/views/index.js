@@ -30,6 +30,14 @@ const Notifications = Loadable({
   loader: () => import('./Notifications/Notifications'),
   loading: Loading,
 })
+const NoAuth = Loadable({
+  loader: () => import('./NoAuth/NoAuth'),
+  loading: Loading,
+})
+const Profile = Loadable({
+  loader: () => import('./Profile/Profile'),
+  loading: Loading,
+})
 export {
   Dashboard,
   Login,
@@ -37,7 +45,9 @@ export {
   ArticleList,
   ArticleEdit,
   Settings,
-  Notifications
+  Notifications,
+  NoAuth,
+  Profile
 }
 // import Dashboard from "./Dashboard/Dashboard";
 // import Login from "./Login/Login"
